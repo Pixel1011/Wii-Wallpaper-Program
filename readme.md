@@ -1,10 +1,13 @@
 # External script for Wii wallpaper by [Lillykyu](https://www.lillykyu.gay/)
 
+
 ## Usage instructions
+**NOTE: make sure your path to where you extract it does not have a space in it! powershell is terrible
+
 1. Download the zip file from releases.
 2. Extract into a folder
-3. Run ``install.bat`` and if that succeeds then run ``start.bat``
-4. Edit the info.txt with your executables and log path in the format shown in the file
+3. Edit the info.txt with your executables and log path in the format shown in the file
+4. Run ``install.bat`` and if that succeeds then run ``start.bat``
 
 If you need to make any edits, run ``stop.bat``, edit your info.txt then run ``start.bat`` to restart it
 
