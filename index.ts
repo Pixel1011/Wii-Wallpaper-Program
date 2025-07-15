@@ -9,7 +9,6 @@
 import fs from "fs";
 import { exec, ExecException, execSync } from "child_process";
 
-let taskName = "WiiWallpaper";
 // File path to log.txt
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
 

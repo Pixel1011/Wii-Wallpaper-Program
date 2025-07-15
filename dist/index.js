@@ -5,11 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
-let taskName = "WiiWallpaper";
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
 let apps = {};
 let sampleText = `${logFilePath}
-app1=
+app1=C:\\Program Files (x86)\\Steam\\steam.exe
 app2=
 app3=
 app4=
