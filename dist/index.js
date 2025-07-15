@@ -30,11 +30,11 @@ async function sendError(msg, title, timeout, callback) {
     });
 }
 async function loadApps() {
-    if (!fs_1.default.existsSync("infopath")) {
-        fs_1.default.writeFileSync("infopath", sampleText);
+    if (!fs_1.default.existsSync(infopath)) {
+        fs_1.default.writeFileSync(infopath, sampleText);
         await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, () => { process.exit(); });
     }
-    let data = fs_1.default.readFileSync("infopath").toString().split("\n");
+    let data = fs_1.default.readFileSync(infopath).toString().split("\n");
     logFilePath = data.splice(0, 1)[0];
     console.log("logfile path: " + logFilePath);
     if (!fs_1.default.existsSync(logFilePath)) {
