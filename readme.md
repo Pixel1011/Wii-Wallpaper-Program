@@ -1,4 +1,4 @@
-# External script for Wii wallpaper by lillykyu
+# External script for Wii wallpaper by [Lillykyu](https://www.lillykyu.gay/)
 
 ## Usage instructions
 1. Download the zip file from releases.
@@ -17,3 +17,6 @@ Run these commands in order in the main directory:
   - ``pnpm i or npm i``
   - ``tsc``
   - ``pkg .\dist\index.js --targets latest-win-x64 --output ./dont-touch/lillywallpaper.exe``
+
+:3
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N6145I0V)
