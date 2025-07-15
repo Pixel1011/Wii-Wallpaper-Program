@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
-const dialog_node_1 = __importDefault(require("dialog-node"));
+let taskName = "WiiWallpaper";
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
 let apps = {};
 let sampleText = `${logFilePath}
@@ -21,10 +21,10 @@ app9=
 app10=
 app11=
 app12=`;
-function sendError(msg, title, timeout, callback) {
+async function sendError(msg, title, timeout, callback) {
     return new Promise((res, rej) => {
-        dialog_node_1.default.error(msg, title, timeout, (code, retval, stderr) => {
-            callback(code, retval, stderr);
+        (0, child_process_1.exec)(`powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('${msg}', '${title}', 'OK', 'Error')"`, () => {
+            callback();
             res();
         });
     });
@@ -32,13 +32,13 @@ function sendError(msg, title, timeout, callback) {
 async function loadApps() {
     if (!fs_1.default.existsSync("./info.txt")) {
         fs_1.default.writeFileSync("./info.txt", sampleText);
-        await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, (code, retval) => { process.exit(); });
+        await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, () => { process.exit(); });
     }
     let data = fs_1.default.readFileSync("./info.txt").toString().split("\n");
     logFilePath = data.splice(0, 1)[0];
     console.log("logfile path: " + logFilePath);
     if (!fs_1.default.existsSync(logFilePath)) {
-        await sendError("No log file found! Please fix the path or enable verbose logging in wallpaper engine!", "Error", 0, (code, retval) => { process.exit(); });
+        await sendError("No log file found! Please fix the path or enable verbose logging in wallpaper engine!", "Error", 0, () => { process.exit(); });
     }
     for (let i = 0; i < data.length; i++) {
         let e = data[i];
@@ -47,7 +47,7 @@ async function loadApps() {
         let split = e.split("=");
         let number = e.split("=")[0].replace("app", "");
         if (isNaN(parseInt(number))) {
-            await sendError(`Line #${i + 2} in info.txt is misformatted.\nPlease fix!`, "Error", 0, (code, retval) => { process.exit(); });
+            await sendError(`Line #${i + 2} in info.txt is misformatted.\nPlease fix!`, "Error", 0, () => { process.exit(); });
         }
         let path = split[1];
         if (!path) {
@@ -79,37 +79,7 @@ function checkWallpaperLog() {
         });
     });
 }
-function isServiceInstalled(name) {
-    try {
-        (0, child_process_1.execSync)(`sc query "${name}"`, { stdio: "ignore" });
-        return true;
-    }
-    catch {
-        return false;
-    }
-}
-function installService(name) {
-    const exePath = process.execPath;
-    const cmd = `sc create "${name}" binPath= "${exePath}" start= auto`;
-    (0, child_process_1.execSync)(cmd);
-    (0, child_process_1.execSync)(`sc start "${name}"`);
-    console.log("Service installed and started.");
-}
-function uninstallService(name) {
-    if (isServiceInstalled(name)) {
-        try {
-            (0, child_process_1.execSync)(`sc stop "${name}"`, { stdio: "ignore" });
-        }
-        catch (err) {
-            console.warn("Warning: Could not stop service.");
-        }
-        (0, child_process_1.execSync)(`sc delete "${name}"`);
-        console.log("Service uninstalled.");
-    }
-}
 async function main() {
-    let serviceName = "WiiWallpaper";
-    uninstallService(serviceName);
     await loadApps();
     checkWallpaperLog();
 }

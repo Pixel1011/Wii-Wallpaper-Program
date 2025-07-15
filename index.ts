@@ -7,18 +7,17 @@
 // i love new eslint... :(
 
 import fs from "fs";
-import { exec, execSync } from "child_process";
-import dialog from "dialog-node";
+import { exec, ExecException, execSync } from "child_process";
 
+let taskName = "WiiWallpaper";
 // File path to log.txt
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
 
-// format: appI: '"path"',
-let apps = {
+// format: appI: 'path',
+let apps = {};
 
-};
 let sampleText = `${logFilePath}
-app1=
+app1=C:\\Program Files (x86)\\Steam\\steam.exe
 app2=
 app3=
 app4=
@@ -31,10 +30,10 @@ app10=
 app11=
 app12=`;
 
-function sendError(msg: string, title: string, timeout: number, callback: dialog.DialogCallback<"OK" | "CANCEL">) {
+async function sendError(msg: string, title: string, timeout: number, callback: { (): never; (): never; (): never; (error: ExecException | null, stdout: string, stderr: string): void }) {
     return new Promise<void>((res, rej) => {
-        dialog.error(msg, title, timeout, (code, retval, stderr: string) => {
-            callback(code, retval, stderr);
+        exec(`powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('${msg}', '${title}', 'OK', 'Error')"`, () => {
+            callback();
             res();
         });
     });
@@ -43,13 +42,13 @@ function sendError(msg: string, title: string, timeout: number, callback: dialog
 async function loadApps() {
     if (!fs.existsSync("./info.txt")) {
         fs.writeFileSync("./info.txt", sampleText);
-        await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, (code, retval) => { process.exit(); });
+        await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, () => { process.exit(); });
     }
     let data = fs.readFileSync("./info.txt").toString().split("\n");
     logFilePath = data.splice(0, 1)[0];
     console.log("logfile path: " + logFilePath);
     if (!fs.existsSync(logFilePath)) {
-        await sendError("No log file found! Please fix the path or enable verbose logging in wallpaper engine!", "Error", 0, (code, retval) => { process.exit(); });
+        await sendError("No log file found! Please fix the path or enable verbose logging in wallpaper engine!", "Error", 0, () => { process.exit(); });
     }
 
     for (let i = 0; i < data.length; i++) {
@@ -58,7 +57,7 @@ async function loadApps() {
         let split = e.split("=");
         let number = e.split("=")[0].replace("app", "");
         if (isNaN(parseInt(number))) {
-            await sendError(`Line #${i + 2} in info.txt is misformatted.\nPlease fix!`, "Error", 0, (code, retval) => { process.exit(); });
+            await sendError(`Line #${i + 2} in info.txt is misformatted.\nPlease fix!`, "Error", 0, () => { process.exit(); });
         }
 
         let path = split[1];
@@ -95,40 +94,8 @@ function checkWallpaperLog() {
     });
 }
 
-function isServiceInstalled(name: string) {
-    try {
-        execSync(`sc query "${name}"`, { stdio: "ignore" });
-        return true;
-    } catch {
-        return false;
-    }
-}
-function installService(name: string) {
-    const exePath = process.execPath;
-    const cmd = `sc create "${name}" binPath= "${exePath}" start= auto`;
-    execSync(cmd);
-    execSync(`sc start "${name}"`);
-    console.log("Service installed and started.");
-}
-
-function uninstallService(name: string) {
-    if (isServiceInstalled(name)) {
-        try {
-            execSync(`sc stop "${name}"`, { stdio: "ignore" });
-        } catch (err) {
-            console.warn("Warning: Could not stop service.");
-        }
-
-        execSync(`sc delete "${name}"`);
-        console.log("Service uninstalled.");
-    }
-}
-
 async function main() {
-    let serviceName = "WiiWallpaper";
-    uninstallService(serviceName);
     await loadApps();
-    //installService(serviceName);
     checkWallpaperLog();
 }
 
