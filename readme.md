@@ -2,7 +2,7 @@
 
 
 ## Usage instructions
-**NOTE: make sure your path to where you extract it does not have a space in it! powershell is terrible
+**NOTE: make sure your path to where you extract it does not have a space in it! powershell is terrible**
 
 1. Download the zip file from releases.
 2. Extract into a folder
