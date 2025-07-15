@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
+let infopath = "../info.txt";
 let apps = {};
 let sampleText = `${logFilePath}
 app1=C:\\Program Files (x86)\\Steam\\steam.exe
@@ -29,11 +30,11 @@ async function sendError(msg, title, timeout, callback) {
     });
 }
 async function loadApps() {
-    if (!fs_1.default.existsSync("./info.txt")) {
-        fs_1.default.writeFileSync("./info.txt", sampleText);
+    if (!fs_1.default.existsSync("infopath")) {
+        fs_1.default.writeFileSync("infopath", sampleText);
         await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, () => { process.exit(); });
     }
-    let data = fs_1.default.readFileSync("./info.txt").toString().split("\n");
+    let data = fs_1.default.readFileSync("infopath").toString().split("\n");
     logFilePath = data.splice(0, 1)[0];
     console.log("logfile path: " + logFilePath);
     if (!fs_1.default.existsSync(logFilePath)) {

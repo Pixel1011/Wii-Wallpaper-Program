@@ -1,0 +1,1 @@
+powershell -NoProfile -ExecutionPolicy Bypass -File "./dont-touch/stop.ps1"

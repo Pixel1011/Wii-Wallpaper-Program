@@ -1,1 +1,0 @@
-schtasks /Run /TN "WiiWallpaper"

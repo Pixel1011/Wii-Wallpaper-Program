@@ -11,7 +11,7 @@ import { exec, ExecException, execSync } from "child_process";
 
 // File path to log.txt
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
-
+let infopath = "../info.txt";
 // format: appI: 'path',
 let apps = {};
 
@@ -39,11 +39,11 @@ async function sendError(msg: string, title: string, timeout: number, callback: 
 }
 
 async function loadApps() {
-    if (!fs.existsSync("./info.txt")) {
-        fs.writeFileSync("./info.txt", sampleText);
+    if (!fs.existsSync("infopath")) {
+        fs.writeFileSync("infopath", sampleText);
         await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, () => { process.exit(); });
     }
-    let data = fs.readFileSync("./info.txt").toString().split("\n");
+    let data = fs.readFileSync("infopath").toString().split("\n");
     logFilePath = data.splice(0, 1)[0];
     console.log("logfile path: " + logFilePath);
     if (!fs.existsSync(logFilePath)) {
