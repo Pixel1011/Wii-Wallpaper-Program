@@ -2,7 +2,7 @@
 if (-not ([Security.Principal.WindowsPrincipal] `
         [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Output "Restarting as administrator..."
-    Start-Process powershell -ArgumentList "-NoExit -NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     exit
 }
 
@@ -20,7 +20,6 @@ if ($LASTEXITCODE -eq 0) {
 } else {
     Write-Output "Creating task '$taskName'..."
     cd $scriptDIR
-    Write-Output $taskCommand
     $result = schtasks /Create /TN $taskName /TR $taskCommand /SC ONLOGON /RL LIMITED /F
     if ($LASTEXITCODE -eq 0) {
         Write-Output "Task created successfully."
@@ -28,4 +27,5 @@ if ($LASTEXITCODE -eq 0) {
         Write-Error "Failed to create task. Exit code: $LASTEXITCODE"
         Write-Output $result
     }
+    pause
 }
