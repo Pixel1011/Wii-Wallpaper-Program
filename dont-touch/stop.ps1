@@ -6,6 +6,9 @@ if (-not ([Security.Principal.WindowsPrincipal] `
     exit
 }
 
+Write-Output "Ending WiiWallpaper task.."
 schtasks /End /TN "WiiWallpaper"
+Write-Output "Killing wallpaper process.."
 taskkill /IM lillywallpaper.exe /F
+Write-Output "Sucess! (if the one above this message errored, it is fine)"
 pause

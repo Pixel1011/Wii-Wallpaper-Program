@@ -1,4 +1,4 @@
-C:\Program Files (x86)\Steam\steamapps\common\wallpaper_engine\log.txt
+D:\SteamLibrary\steamapps\common\wallpaper_engine\log.txt
 app1=C:\Program Files (x86)\Steam\steam.exe
 app2=
 app3=
@@ -11,3 +11,6 @@ app9=
 app10=
 app11=
 app12=
+app13=
+app14=
+app15=

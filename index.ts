@@ -7,7 +7,7 @@
 // i love new eslint... :(
 
 import fs from "fs";
-import { exec, ExecException, execSync } from "child_process";
+import { exec, ExecException, execSync, spawn } from "child_process";
 
 // File path to log.txt
 let logFilePath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt";
@@ -27,7 +27,10 @@ app8=
 app9=
 app10=
 app11=
-app12=`;
+app12=
+app13=
+app14=
+app15=`;
 
 async function sendError(msg: string, title: string, timeout: number, callback: { (): never; (): never; (): never; (error: ExecException | null, stdout: string, stderr: string): void }) {
     return new Promise<void>((res, rej) => {

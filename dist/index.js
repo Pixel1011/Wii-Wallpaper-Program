@@ -20,7 +20,10 @@ app8=
 app9=
 app10=
 app11=
-app12=`;
+app12=
+app13=
+app14=
+app15=`;
 async function sendError(msg, title, timeout, callback) {
     return new Promise((res, rej) => {
         (0, child_process_1.exec)(`powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('${msg}', '${title}', 'OK', 'Error')"`, () => {

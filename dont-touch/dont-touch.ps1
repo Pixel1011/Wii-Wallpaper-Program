@@ -4,4 +4,4 @@ $exePath = Join-Path $scriptDir "lillywallpaper.exe"
 echo $scriptDir
 cd $scriptDir
 
-powershell.exe -Command `$process = Start-Process -FilePath $exePath -WindowStyle Hidden -PassThru
+powershell.exe -ExecutionPolicy Bypass -Command `$process = Start-Process -FilePath $exePath -WindowStyle Hidden -PassThru

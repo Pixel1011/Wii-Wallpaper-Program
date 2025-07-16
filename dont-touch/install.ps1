@@ -11,7 +11,7 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $exePath = Join-Path $scriptDir "dont-touch.ps1"
 
 # this is the thing that took about 6 years to figure out i hate powershell i never wanna touch ever again oh my god
-$taskCommand = "powershell.exe -Command `"\`"$exePath\`"`""
+$taskCommand = "powershell.exe -ExecutionPolicy Bypass -Command `"\`"$exePath\`"`""
 
 # Check if task exists
 schtasks /Query /TN $taskName > $null 2>&1
@@ -27,5 +27,5 @@ if ($LASTEXITCODE -eq 0) {
         Write-Error "Failed to create task. Exit code: $LASTEXITCODE"
         Write-Output $result
     }
-    pause
 }
+pause
