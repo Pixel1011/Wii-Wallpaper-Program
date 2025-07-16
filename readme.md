@@ -26,3 +26,5 @@ Run these commands in order in the main directory:
 
 :3
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N6145I0V)
+
+(or feel free to leave a star, that is nice too :D)
