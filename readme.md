@@ -16,7 +16,24 @@
 If you need to make any edits, run ``stop.bat``, edit your info.txt then run ``start.bat`` to restart it
 
 Once that is done, you dont need to do anything else, just keep these files and the script will automatically start upon reboots!
-If you wish to uninstall the program, delete these files, open task scheduler and remove the "WiiWallpaper" task
+If you wish to uninstall the program, run ``uninstall.bat``, delete these files and your done!
+
+## FAQ/Common issues
+
+> Your getting an error message looking like this
+![image](http://img.pixelator.xyz/QO9XaO2u.png)
+> Remove spaces from your path! In this example the folder "Wii Wallpaper" has a space in the middle
+
+>"The operation was canceled by the user."
+![image](http://img.pixelator.xyz/mTE2qzag.png)
+>This is caused by the exe being blocked by windows smartscreen.
+>You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
+>You may also see a popup looking like this
+![image](http://img.pixelator.xyz/JY93dHgw.png)
+>Click __More info__ and press **Run Anyways**
+>You may then close the cmd that pops up and run ``stop.bat``
+>You can then run ``start.bat`` and it should run as normal!
+
 
 ## Build instructions
 ### IGNORE IF USING FOR GENERAL USAGE
