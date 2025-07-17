@@ -23,6 +23,7 @@ if ($LASTEXITCODE -eq 0) {
     $result = schtasks /Create /TN $taskName /TR $taskCommand /SC ONLOGON /RL LIMITED /F
     if ($LASTEXITCODE -eq 0) {
         Write-Output "Task created successfully."
+        Write-Output "Make sure to run start.bat!"
     } else {
         Write-Error "Failed to create task. Exit code: $LASTEXITCODE"
         Write-Output $result

@@ -4,7 +4,7 @@
 ## Usage instructions
 **NOTE: make sure your path to where you extract it does not have a space in it! powershell is terrible**
 
-**Another note: this does not support applications with arguments, if you wish to run an application with arguments, either create a shortcut to it and add that to info.txt, or create a bat script that runs your app and add that**
+**Another note: this does not directly support applications with arguments, if you wish to run an application with arguments, either create a shortcut to it and add that to info.txt, or create a bat script that runs your app and add that**
 
 1. Download the zip file from releases.
 2. Extract into a folder

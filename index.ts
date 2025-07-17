@@ -1,3 +1,5 @@
+/* eslint-disable @stylistic/no-trailing-spaces */
+/* eslint-disable @stylistic/padded-blocks */
 /* eslint-disable @stylistic/spaced-comment */
 /* eslint-disable @stylistic/brace-style */
 /* eslint-disable @stylistic/max-statements-per-line */
@@ -15,7 +17,42 @@ let infopath = "../info.txt";
 // format: appI: 'path',
 let apps = {};
 
-let sampleText = `${logFilePath}
+// adapted from yeeterlol's code (thank you!! :D)
+async function getLogFile() {
+    if (fs.existsSync(logFilePath)) {
+        return { path: logFilePath, guess: false };
+    }
+    let findPath = execSync(`wmic process where "name='wallpaper32.exe'" get ExecutablePath`, { windowsHide: true }).toString().trim();
+    let findPath64 = execSync(`wmic process where "name='wallpaper64.exe'" get ExecutablePath`, { windowsHide: true }).toString().trim();
+
+    if (!findPath.includes("ExecutablePath") && !findPath64.includes("ExecutablePath")) {
+        return { path: "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt", guess: true };
+    }
+    let logpath: string;
+    if (findPath.includes("ExecutablePath")) {
+        let executablePath = findPath.split("\n")[1].trim();
+        return { path: executablePath.replace("wallpaper32.exe", "log.txt"), guess: false };
+    }
+    if (findPath64.includes("ExecutablePath")) {
+        let executablePath = findPath.split("\n")[1].trim();
+        return { path: executablePath.replace("wallpaper64.exe", "log.txt"), guess: false };
+    }
+}
+
+async function sendError(msg: string, title: string, timeout: number, callback: { (): never; (): never; (): never; (error: ExecException | null, stdout: string, stderr: string): void }) {
+    return new Promise<void>((res, rej) => {
+        exec(`powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('${msg}', '${title}', 'OK', 'Error')"`, () => {
+            callback();
+            res();
+        });
+    });
+}
+
+async function loadApps() {
+    let logFileRes = await getLogFile();
+    logFilePath = logFileRes.path;
+
+    let sampleText = `${logFilePath}
 app1=C:\\Program Files (x86)\\Steam\\steam.exe
 app2=
 app3=
@@ -32,25 +69,23 @@ app13=
 app14=
 app15=`;
 
-async function sendError(msg: string, title: string, timeout: number, callback: { (): never; (): never; (): never; (error: ExecException | null, stdout: string, stderr: string): void }) {
-    return new Promise<void>((res, rej) => {
-        exec(`powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('${msg}', '${title}', 'OK', 'Error')"`, () => {
-            callback();
-            res();
-        });
-    });
-}
-
-async function loadApps() {
     if (!fs.existsSync(infopath)) {
         fs.writeFileSync(infopath, sampleText);
         await sendError("Please edit the newly created info.txt with your log file path and apps/commands to execute", "Error", 0, () => { process.exit(); });
     }
     let data = fs.readFileSync(infopath).toString().split("\n");
-    logFilePath = data.splice(0, 1)[0];
+    let localLogFilePath = data.splice(0, 1)[0];
+    // only update the file automatically if its not a guess, otherwise may end up writing the wrong (default) path and being very confusing as that could occur on reboots where wallpaper engine hasnt started yet
+    if (logFilePath != localLogFilePath && !logFileRes.guess) {
+        data.unshift(logFilePath);
+        fs.writeFileSync(infopath, data.join("\n"));
+        localLogFilePath = data.splice(0, 1)[0];
+    } else {
+        logFilePath = localLogFilePath;
+    }
     console.log("logfile path: " + logFilePath);
     if (!fs.existsSync(logFilePath)) {
-        await sendError("No log file found! Please fix the path or enable verbose logging in wallpaper engine!", "Error", 0, () => { process.exit(); });
+        await sendError("No log file found! Please fix the path in info.txt or enable verbose logging in wallpaper engine!", "Error", 0, () => { process.exit(); });
     }
 
     for (let i = 0; i < data.length; i++) {
@@ -68,7 +103,7 @@ async function loadApps() {
             continue;
         }
 
-        apps[`app${number}`] = "\"" + path + "\"";
+        apps[`app${number}`] = "\"" + path.trim() + "\"";
     }
 
     console.log("Loaded apps");
