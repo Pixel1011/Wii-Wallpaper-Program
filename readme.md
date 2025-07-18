@@ -34,6 +34,7 @@ If you wish to uninstall the program, run ``uninstall.bat``, delete these files 
 >You may then close the cmd that pops up and run ``stop.bat``
 >You can then run ``start.bat`` and it should run as normal!
 
+If all else fails, try restarting your pc!
 
 ## Build instructions
 ### IGNORE IF USING FOR GENERAL USAGE
