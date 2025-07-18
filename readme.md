@@ -20,9 +20,12 @@ If you wish to uninstall the program, run ``uninstall.bat``, delete these files 
 
 ## FAQ/Common issues
 
+
 > Your getting an error message looking like this
 ![image](http://img.pixelator.xyz/QO9XaO2u.png)
 > Remove spaces from your path! In this example the folder "Wii Wallpaper" has a space in the middle
+
+
 
 >"The operation was canceled by the user."
 ![image](http://img.pixelator.xyz/mTE2qzag.png)
@@ -30,6 +33,9 @@ If you wish to uninstall the program, run ``uninstall.bat``, delete these files 
 >You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
 >You may also see a popup looking like this
 ![image](http://img.pixelator.xyz/JY93dHgw.png)
+
+
+
 >Click __More info__ and press **Run Anyways**
 >You may then close the cmd that pops up and run ``stop.bat``
 >You can then run ``start.bat`` and it should run as normal!
