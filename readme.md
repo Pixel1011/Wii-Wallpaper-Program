@@ -4,8 +4,6 @@
 ## Usage instructions
 **NOTE: make sure your path to where you extract it does not have a space in it! powershell is terrible**
 
-**Another note: this does not directly support applications with arguments, if you wish to run an application with arguments, either create a shortcut to it and add that to info.txt, or create a bat script that runs your app and add that**
-
 1. Download the zip file from releases.
 2. Extract into a folder
 3. Enable Verbose logging in wallpaper engine
@@ -15,28 +13,28 @@
 
 If you need to make any edits, run ``stop.bat``, edit your info.txt then run ``start.bat`` to restart it
 
+**Another note: this does not directly support applications with arguments, if you wish to run an application with arguments, use ``cmd /c yourcommandhere``, eg ``cmd /c start https://www.youtube.com/watch?v=dQw4w9WgXcQ``. You can check [here](https://docs.google.com/document/d/1BVPGTDyzMaWZIGxTkfvdh9g5MXfPOBSAIsLmjvk29fE/edit?tab=t.0) for more examples to put in your info.txt!**
+
 Once that is done, you dont need to do anything else, just keep these files and the script will automatically start upon reboots!
 If you wish to uninstall the program, run ``uninstall.bat``, delete these files and your done!
 
 ## FAQ/Common issues
 
 
-> Your getting an error message looking like this
+> **Your getting an error message looking like this:**
 ![image](http://img.pixelator.xyz/QO9XaO2u.png)
 > Remove spaces from your path! In this example the folder "Wii Wallpaper" has a space in the middle
 
 
 
->"The operation was canceled by the user."
+>**"The operation was canceled by the user."**
 ![image](http://img.pixelator.xyz/mTE2qzag.png)
 >This is caused by the exe being blocked by windows smartscreen.
 >You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
 >You may also see a popup looking like this
 ![image](http://img.pixelator.xyz/JY93dHgw.png)
 
-
-
->Click __More info__ and press **Run Anyways**
+>Click __More info__ and press **Run Anyways**.
 >You may then close the cmd that pops up and run ``stop.bat``
 >You can then run ``start.bat`` and it should run as normal!
 
