@@ -15,6 +15,8 @@ If you need to make any edits, run ``stop.bat``, edit your info.txt then run ``s
 
 **Another note: this does not directly support applications with arguments, if you wish to run an application with arguments, use ``cmd /c yourcommandhere``, eg ``cmd /c start https://www.youtube.com/watch?v=dQw4w9WgXcQ``. You can check [here](https://docs.google.com/document/d/1BVPGTDyzMaWZIGxTkfvdh9g5MXfPOBSAIsLmjvk29fE/edit?tab=t.0) for more examples to put in your info.txt!**
 
+**Video tutorials [here!](https://docs.google.com/document/d/1BVPGTDyzMaWZIGxTkfvdh9g5MXfPOBSAIsLmjvk29fE/edit?tab=t.tl4p3yca6zrf)**
+
 Once that is done, you dont need to do anything else, just keep these files and the script will automatically start upon reboots!
 If you wish to uninstall the program, run ``uninstall.bat``, delete these files and your done!
 
