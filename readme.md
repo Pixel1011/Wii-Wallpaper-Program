@@ -39,6 +39,7 @@ This is caused by the exe being blocked by windows smartscreen.
 You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
 
 You may also see a popup looking like this
+
 ![image](http://img.pixelator.xyz/JY93dHgw.png)
 
 
