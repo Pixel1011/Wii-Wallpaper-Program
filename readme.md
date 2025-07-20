@@ -22,21 +22,26 @@ If you wish to uninstall the program, run ``uninstall.bat``, delete these files 
 ## FAQ/Common issues
 
 
-> **Your getting an error message looking like this:**
+### Your getting an error message looking like this:*
 ![image](http://img.pixelator.xyz/3PpSF0iN.png)
-> Remove spaces from your path to where you extracted the zip! (this does not mean within your info.txt)
-> In this example the folder "Wii Wallpaper" has a space in the middle, remove it and rerun install!
+Remove spaces from your path to where you extracted the zip! (this does not mean within your info.txt)
+In this example the folder "Wii Wallpaper" has a space in the middle, remove it and rerun install!
 
->**"The operation was canceled by the user. OR when running start, a powershell window flashes with an error and then closes, with your wallpaper not working"**
+---
+
+### "The operation was canceled by the user. OR when running start, a powershell window flashes with an error and then closes, with your wallpaper not functioning"
 ![image](http://img.pixelator.xyz/mTE2qzag.png)
->This is caused by the exe being blocked by windows smartscreen.
->You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
->You may also see a popup looking like this
+This is caused by the exe being blocked by windows smartscreen.
+You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
+You may also see a popup looking like this
 ![image](http://img.pixelator.xyz/JY93dHgw.png)
 
->Click __More info__ and press **Run Anyways**.
->You may then close the cmd that pops up and run ``stop.bat``
->You can then run ``start.bat`` and it should run as normal!
+
+Click __More info__ and press **Run Anyways**.
+You may then close the cmd that pops up and run ``stop.bat``
+You can then run ``start.bat`` and it should run as normal!
+
+---
 
 If all else fails, try restarting your pc!
 
