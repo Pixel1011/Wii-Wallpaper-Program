@@ -7,9 +7,8 @@
 1. Download the zip file from releases.
 2. Extract into a folder
 3. Enable Verbose logging in wallpaper engine
-4. Open a powershell window as admin and run ``Set-ExecutionPolicy Unrestricted``
-5. Edit the info.txt with your executables and log path in the format shown in the file
-6. Run ``install.bat`` and if that succeeds then run ``start.bat``
+4. Edit the info.txt with your executables and log path in the format shown in the file
+5. Run ``install.bat`` and if that succeeds then run ``start.bat``
 
 If you need to make any edits, run ``stop.bat``, edit your info.txt then run ``start.bat`` to restart it
 
@@ -24,12 +23,11 @@ If you wish to uninstall the program, run ``uninstall.bat``, delete these files 
 
 
 > **Your getting an error message looking like this:**
-![image](http://img.pixelator.xyz/QO9XaO2u.png)
-> Remove spaces from your path! In this example the folder "Wii Wallpaper" has a space in the middle
+![image](http://img.pixelator.xyz/3PpSF0iN.png)
+> Remove spaces from your path to where you extracted the zip! (this does not mean within your info.txt)
+> In this example the folder "Wii Wallpaper" has a space in the middle, remove it and rerun install!
 
-
-
->**"The operation was canceled by the user."**
+>**"The operation was canceled by the user. OR when running start, a powershell window flashes with an error and then closes, with your wallpaper not working"**
 ![image](http://img.pixelator.xyz/mTE2qzag.png)
 >This is caused by the exe being blocked by windows smartscreen.
 >You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
