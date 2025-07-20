@@ -17,6 +17,7 @@ If you need to make any edits, run ``stop.bat``, edit your info.txt then run ``s
 **Video tutorials [here!](https://docs.google.com/document/d/1BVPGTDyzMaWZIGxTkfvdh9g5MXfPOBSAIsLmjvk29fE/edit?tab=t.tl4p3yca6zrf)**
 
 Once that is done, you dont need to do anything else, just keep these files and the script will automatically start upon reboots!
+
 If you wish to uninstall the program, run ``uninstall.bat``, delete these files and your done!
 
 ## FAQ/Common issues
@@ -25,14 +26,18 @@ If you wish to uninstall the program, run ``uninstall.bat``, delete these files 
 ### Your getting an error message looking like this:*
 ![image](http://img.pixelator.xyz/3PpSF0iN.png)
 Remove spaces from your path to where you extracted the zip! (this does not mean within your info.txt)
+
 In this example the folder "Wii Wallpaper" has a space in the middle, remove it and rerun install!
 
 ---
 
 ### "The operation was canceled by the user. OR when running start, a powershell window flashes with an error and then closes, with your wallpaper not functioning"
 ![image](http://img.pixelator.xyz/mTE2qzag.png)
+
 This is caused by the exe being blocked by windows smartscreen.
+
 You will need to go into the dont-touch folder and run the ``lillywallpaper.exe`` manually once
+
 You may also see a popup looking like this
 ![image](http://img.pixelator.xyz/JY93dHgw.png)
 
