@@ -77,11 +77,12 @@ app15=`;
         if (!e)
             continue;
         let split = e.split("=");
-        let number = e.split("=")[0].replace("app", "");
+        let number = split[0].replace("app", "");
         if (isNaN(parseInt(number))) {
             await sendError(`Line #${i + 2} in info.txt is misformatted.\nPlease fix!`, "Error", 0, () => { process.exit(); });
         }
-        let path = split[1];
+        split.splice(0, 1);
+        let path = split.join("=");
         if (!path) {
             console.log(`app${number} missing executable/command, continuing..`);
             continue;
