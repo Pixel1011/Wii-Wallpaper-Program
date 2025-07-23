@@ -91,7 +91,7 @@ app15=`;
     for (let i = 0; i < data.length; i++) {
         let e = data[i];
         if (!e) continue;
-        let split = e.split("=");
+        let split = e.split(/=(.*)/s);
         let number = e.split("=")[0].replace("app", "");
         if (isNaN(parseInt(number))) {
             await sendError(`Line #${i + 2} in info.txt is misformatted.\nPlease fix!`, "Error", 0, () => { process.exit(); });
