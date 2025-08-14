@@ -22,20 +22,20 @@ async function getLogFile() {
     if (fs.existsSync(logFilePath)) {
         return { path: logFilePath, guess: false };
     }
-    let findPath = execSync(`wmic process where "name='wallpaper32.exe'" get ExecutablePath`, { windowsHide: true }).toString().trim();
-    let findPath64 = execSync(`wmic process where "name='wallpaper64.exe'" get ExecutablePath`, { windowsHide: true }).toString().trim();
-
-    if (!findPath.includes("ExecutablePath") && !findPath64.includes("ExecutablePath")) {
+    //let findPath = execSync(`wmic process where "name='wallpaper32.exe'" get ExecutablePath`, { windowsHide: true }).toString().trim();
+    //let findPath64 = execSync(`wmic process where "name='wallpaper64.exe'" get ExecutablePath`, { windowsHide: true }).toString().trim();
+    let findPath = execSync(`powershell.exe -command "Get-WmiObject win32_process | Where-Object name -eq wallpaper32.exe | Select -ExpandProperty ExecutablePath"`, { windowsHide: true }).toString().trim();
+    let findPath64 = execSync(`powershell.exe -command "Get-WmiObject win32_process | Where-Object name -eq wallpaper64.exe | Select -ExpandProperty ExecutablePath"`, { windowsHide: true }).toString().trim();
+    
+    if (!findPath && !findPath64) {
         return { path: "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine\\log.txt", guess: true };
     }
     let logpath: string;
-    if (findPath.includes("ExecutablePath")) {
-        let executablePath = findPath.split("\n")[1].trim();
-        return { path: executablePath.replace("wallpaper32.exe", "log.txt"), guess: false };
+    if (findPath.includes("wallpaper32")) {
+        return { path: findPath.replace("wallpaper32.exe", "log.txt"), guess: false };
     }
-    if (findPath64.includes("ExecutablePath")) {
-        let executablePath = findPath.split("\n")[1].trim();
-        return { path: executablePath.replace("wallpaper64.exe", "log.txt"), guess: false };
+    if (findPath64.includes("wallpaper64")) {
+        return { path: findPath64.replace("wallpaper64.exe", "log.txt"), guess: false };
     }
 }
 
