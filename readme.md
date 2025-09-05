@@ -1,6 +1,8 @@
 # External script for [Wii wallpaper](https://steamcommunity.com/sharedfiles/filedetails/?id=3526096300) by [Lillykyu](https://www.lillykyu.gay/)
 
 # **As of the release of Wallpaper engine 2.7 this program is no longer needed!**<br>[New tutorial](https://www.youtube.com/watch?v=Z-R6tr957Mk)
+<br>
+<br>
 
 ## Usage instructions
 **NOTE: make sure your path to where you extract it does not have a space in it! powershell is terrible**
